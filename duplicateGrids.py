@@ -4,6 +4,7 @@ particleName = 'DOR_VFX_16_04_nParticle'
 cache = [
         r"P:\external\Epic_Pictures\Day_of_Reckoning\Test\Junaid.Farooq\Jin_Dust_Cycle\Jinn2_Dust_Cycle_Cache\ver02\dust_.fxd",
         ]
+cache_range = (1, 16)
 name = "ffx_dup"
 preset = "ffx_preset1"
 lights = [
@@ -80,12 +81,10 @@ def createFFXForParticles(particle, parent, use_cycle=True):
             cache_idx = 0
             cache_idx = int(charId % len(cache))
             f.output_path.set(cache[cache_idx].replace('\\', '\\\\'))
-            start = int ( round(pc.playbackOptions(min=True, query=True)) )
-            end = int( round(pc.playbackOptions(max=True, query=True)) )
-            f.start_frame.set(1)
-            f.end_frame.set(16)
-            f.playback_start_frame.set(1)
-            f.playback_end_frame.set(16)
+            f.start_frame.set(cache_range[0])
+            f.end_frame.set(cache_range[1])
+            f.playback_start_frame.set(cache_range[0])
+            f.playback_end_frame.set(cache_range[1])
             f.playback_start_offset.set(time)
             if use_cycle:
                 f.playback_after_end_type.set(2)
@@ -118,4 +117,5 @@ def createFFXForRange():
 
 if __name__ == "__main__":
     createFFXForRange()
+
 
